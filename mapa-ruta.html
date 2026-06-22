@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mapa de Ruteo — Damu SGC</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+  <style>
+    #map { height: 460px; }
+    #map img { max-width: none !important; }
+    .leaflet-routing-container { display: none !important; }
+  </style>
+  <script src="js/store.js" defer></script>
+  <script src="js/mapa-ruta.js" defer></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+
+  <header class="bg-slate-900 border-b border-slate-800 px-6 h-16 flex items-center justify-between gap-4 sticky top-0 z-[1000]">
+    <a href="index.html" class="flex items-center gap-3 no-underline">
+      <div class="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center font-black text-white">D</div>
+      <div class="leading-tight"><span class="font-bold block text-white">Mapa de Ruteo</span><span class="text-blue-400 text-xs">Impacto ambiental de la ruta · Ley REP</span></div>
+    </a>
+    <a href="index.html" class="text-xs text-slate-400 hover:text-white">← Inicio</a>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 py-8 grid lg:grid-cols-3 gap-6">
+
+    <div class="lg:col-span-1 space-y-4">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
+        <h2 class="font-bold mb-3">📍 Trazar ruta</h2>
+        <label class="text-xs text-slate-400">Origen</label>
+        <input id="in-origen" value="San Bernardo, Santiago" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 mb-2 mt-1 text-sm" />
+        <label class="text-xs text-slate-400">Destino</label>
+        <input id="in-destino" value="Pudahuel, Santiago" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 mb-3 mt-1 text-sm" />
+        <button id="btn-trazar" class="w-full bg-blue-600 hover:bg-blue-500 font-semibold rounded-lg py-2 text-sm">Calcular ruta</button>
+        <p id="map-msg" class="text-xs text-slate-400 mt-2 h-4"></p>
+      </div>
+
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
+        <h2 class="font-bold mb-3">🌿 Impacto de la ruta</h2>
+        <div class="space-y-1.5 text-sm">
+          <p class="flex justify-between border-b border-slate-800 pb-1"><span class="text-slate-400">Distancia</span><strong id="r-dist">— km</strong></p>
+          <p class="flex justify-between border-b border-slate-800 pb-1"><span class="text-slate-400">Litros estimados</span><strong id="r-litros">—</strong></p>
+          <p class="flex justify-between border-b border-slate-800 pb-1"><span class="text-slate-400">Costo diésel</span><strong id="r-diesel" class="text-amber-400">—</strong></p>
+          <p class="flex justify-between"><span class="text-slate-400">CO₂e ruta</span><strong id="r-co2" class="text-emerald-400">—</strong></p>
+        </div>
+      </div>
+
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
+        <h2 class="font-bold mb-2">💾 Guardar en operación</h2>
+        <p class="text-xs text-slate-400 mb-2">Vincula esta ruta a un productor (su código). Aparecerá en sus paneles.</p>
+        <input id="in-codigo" placeholder="DAMU-XXXX" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 mb-2 text-sm uppercase" />
+        <label class="text-xs text-slate-400">Vincular producción <span class="text-slate-600">(opcional)</span></label>
+        <select id="in-vinculo" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 mb-1 mt-1 text-sm">
+          <option value="">— ingresa un código válido —</option>
+        </select>
+        <p id="vinc-msg" class="text-[11px] text-slate-500 mb-2 h-4"></p>
+        <button id="btn-guardar" class="w-full bg-emerald-600 hover:bg-emerald-500 font-semibold rounded-lg py-2 text-sm">Guardar como ruta disponible</button>
+        <p id="save-msg" class="text-xs mt-2 h-4"></p>
+      </div>
+    </div>
+
+    <div class="lg:col-span-2">
+      <div id="map" class="rounded-2xl overflow-hidden border border-slate-800"></div>
+    </div>
+  </main>
+</body>
+</html>

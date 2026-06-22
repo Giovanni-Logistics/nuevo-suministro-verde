@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora REP & Multas Art. 48 — Damu SGC</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="js/store.js" defer></script>
+  <script src="js/calculadora.js" defer></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+
+  <header class="bg-slate-900 border-b border-slate-800 px-6 h-16 flex items-center justify-between gap-4 sticky top-0 z-40">
+    <a href="index.html" class="flex items-center gap-3 no-underline">
+      <div class="w-9 h-9 rounded-full bg-emerald-600 flex items-center justify-center font-black text-white">D</div>
+      <div class="leading-tight"><span class="font-bold block text-white">Calculadora REP</span><span class="text-emerald-400 text-xs">Costos & Multas Art. 48 · Ley 20.920</span></div>
+    </a>
+    <a href="index.html" class="text-xs text-slate-400 hover:text-white">← Inicio</a>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-6 py-8 grid lg:grid-cols-2 gap-6">
+
+    <!-- Formulario -->
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+      <h2 class="font-bold text-lg mb-4">🧾 Declaración REP</h2>
+      <label class="text-xs text-slate-400">Categoría</label>
+      <select id="s-cat" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 mb-1 mt-1"></select>
+      <p id="s-decreto" class="text-[11px] text-emerald-400 mb-3 h-4"></p>
+
+      <label class="text-xs text-slate-400">Toneladas declaradas (anuales)</label>
+      <input id="s-tons" type="number" min="0" step="0.1" value="100" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 mb-3 mt-1" />
+
+      <label class="text-xs text-slate-400">Meta de valorización: <strong id="lbl-meta">25</strong>%</label>
+      <input id="s-meta" type="range" min="0" max="100" value="25" class="w-full mb-3 mt-1" />
+
+      <label class="text-xs text-slate-400">Toneladas realmente valorizadas <span class="text-slate-600">(opcional)</span></label>
+      <input id="s-tons-real" type="number" min="0" step="0.1" placeholder="usa la meta si lo dejas vacío" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 mb-3 mt-1" />
+
+      <label class="text-xs text-slate-400">Región (factor logístico)</label>
+      <select id="s-region" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 mt-1"></select>
+    </div>
+
+    <!-- Resultados -->
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+      <h2 class="font-bold text-lg mb-4">📈 Resultado</h2>
+      <div id="estado-banner" class="rounded-xl px-4 py-3 mb-4 text-sm font-semibold"></div>
+      <div id="kpi-grid" class="grid grid-cols-2 gap-3 mb-4"></div>
+      <div class="text-sm space-y-1.5">
+        <p class="flex justify-between border-b border-slate-800 pb-1"><span class="text-slate-400">Costo recolección</span><strong id="o-reco">$0</strong></p>
+        <p class="flex justify-between border-b border-slate-800 pb-1"><span class="text-slate-400">Costo transporte</span><strong id="o-trans">$0</strong></p>
+        <p class="flex justify-between border-b border-slate-800 pb-1"><span class="text-slate-400">Costo valorización</span><strong id="o-val">$0</strong></p>
+        <p class="flex justify-between"><span class="text-slate-400">Meta legal mínima (20%)</span><strong id="o-metalegal">0 t</strong></p>
+      </div>
+
+      <!-- ── Logística inversa rentable ─────────────────────────── -->
+      <div class="mt-4 bg-slate-800/60 border border-slate-700 rounded-xl p-4">
+        <p class="text-xs font-bold text-slate-300 mb-2">♻️ Logística inversa rentable</p>
+        <p class="flex justify-between text-sm border-b border-slate-700 pb-1"><span class="text-slate-400">Ingreso por material recuperado</span><strong id="o-ingreso" class="text-emerald-400">$0</strong></p>
+        <p class="flex justify-between text-sm border-b border-slate-700 py-1"><span class="text-slate-400">Costo total de gestión</span><strong id="o-costo">$0</strong></p>
+        <p class="flex justify-between text-base pt-1.5"><span class="font-semibold">Resultado neto</span><strong id="o-neto" class="text-emerald-400">$0</strong></p>
+        <p id="o-roi" class="text-[11px] text-slate-500 mt-1"></p>
+      </div>
+      <button id="btn-pdf" class="mt-5 w-full bg-emerald-600 hover:bg-emerald-500 font-semibold rounded-lg py-2.5">📄 Descargar Eco-Ticket (PDF)</button>
+    </div>
+  </main>
+</body>
+</html>

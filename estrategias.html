@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comparador de Estrategias REP — Damu SGC</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/store.js" defer></script>
+  <script src="js/estrategias.js" defer></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+
+  <header class="bg-slate-900 border-b border-slate-800 px-6 h-16 flex items-center justify-between gap-4 sticky top-0 z-40">
+    <a href="index.html" class="flex items-center gap-3 no-underline">
+      <div class="w-9 h-9 rounded-full bg-emerald-600 flex items-center justify-center font-black text-white">D</div>
+      <div class="leading-tight"><span class="font-bold block text-white">Comparador de Estrategias</span><span class="text-emerald-400 text-xs">¿Cómo cumplir la Ley REP sin quebrar?</span></div>
+    </a>
+    <a href="index.html" class="text-xs text-slate-400 hover:text-white">← Inicio</a>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-6 py-8">
+
+    <!-- Parámetros -->
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 mb-6">
+      <h2 class="font-bold text-lg mb-4">⚙️ Escenario</h2>
+      <div class="grid md:grid-cols-4 gap-4">
+        <div>
+          <label class="text-xs text-slate-400">Categoría</label>
+          <select id="e-cat" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 mt-1"></select>
+        </div>
+        <div>
+          <label class="text-xs text-slate-400">Toneladas anuales</label>
+          <input id="e-tons" type="number" min="0" step="0.1" value="100" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 mt-1" />
+        </div>
+        <div>
+          <label class="text-xs text-slate-400">Meta valorización: <strong id="lbl-meta">25</strong>%</label>
+          <input id="e-meta" type="range" min="0" max="100" value="25" class="w-full mt-2" />
+        </div>
+        <div>
+          <label class="text-xs text-slate-400">Región</label>
+          <select id="e-region" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 mt-1"></select>
+        </div>
+      </div>
+      <div class="mt-4">
+        <label class="text-xs text-slate-400">Empresas en el sistema colectivo: <strong id="lbl-emp">5</strong></label>
+        <input id="e-emp" type="range" min="1" max="20" value="5" class="w-full mt-1" />
+        <p class="text-[11px] text-slate-500">Más empresas compartiendo recolección y transporte → menor costo logístico unitario.</p>
+      </div>
+    </div>
+
+    <!-- Recomendación -->
+    <div id="recom" class="rounded-2xl px-5 py-4 mb-6 text-sm font-semibold"></div>
+
+    <!-- Tres estrategias -->
+    <div class="grid md:grid-cols-3 gap-4 mb-6">
+      <div class="bg-slate-900 border border-slate-700 rounded-2xl p-5">
+        <h3 class="font-bold mb-1">🏭 Cumplir solo</h3>
+        <p class="text-[11px] text-slate-500 mb-3">La empresa financia toda su logística inversa.</p>
+        <div id="card-solo" class="text-sm space-y-1.5"></div>
+      </div>
+      <div class="bg-slate-900 border border-emerald-700/50 rounded-2xl p-5">
+        <h3 class="font-bold mb-1">🤝 Sistema colectivo</h3>
+        <p class="text-[11px] text-slate-500 mb-3">Varias empresas comparten recolección y transporte.</p>
+        <div id="card-colectivo" class="text-sm space-y-1.5"></div>
+      </div>
+      <div class="bg-slate-900 border border-blue-700/50 rounded-2xl p-5">
+        <h3 class="font-bold mb-1">♻️ Monetizar el residuo</h3>
+        <p class="text-[11px] text-slate-500 mb-3">Valoriza al máximo para capturar el valor del material.</p>
+        <div id="card-monetizar" class="text-sm space-y-1.5"></div>
+      </div>
+    </div>
+
+    <!-- Gráfico comparativo -->
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+      <h3 class="font-bold mb-3">Resultado neto por estrategia <span class="text-xs text-slate-500 font-normal">(ingreso − costo, CLP)</span></h3>
+      <canvas id="e-chart" height="120"></canvas>
+      <p class="text-[11px] text-slate-500 mt-3">Valores referenciales con fines de simulación; las tarifas, precios de mercado y metas son ajustables en <code>store.js</code>.</p>
+    </div>
+  </main>
+</body>
+</html>
