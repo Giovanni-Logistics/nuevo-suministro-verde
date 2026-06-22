@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Damu SGC — Logística Ley REP Chile</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    input[type=range] { accent-color: #059669; }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col">
+
+<!-- ══════════════════════════════
+     NAV
+══════════════════════════════ -->
+<nav class="bg-slate-900 sticky top-0 z-50 flex items-center justify-between px-8 h-16 shadow-xl">
+  <a href="index.html" class="flex items-center gap-3 no-underline">
+    <div class="w-9 h-9 rounded-full bg-emerald-600 flex items-center justify-center font-black text-white text-lg">D</div>
+    <div>
+      <span class="text-white font-bold text-base leading-none">Damu SGC</span>
+      <span class="block text-emerald-400 text-xs leading-none mt-0.5">Trazabilidad Ley REP</span>
+    </div>
+  </a>
+  <ul class="hidden md:flex items-center gap-1 list-none">
+
+    <li><a href="index.html" class="text-white bg-emerald-700 px-3 py-1.5 rounded-md text-sm font-semibold">Inicio</a></li>
+    <li><a href="operativo/index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-1.5 rounded-md text-sm transition-colors">Módulo Operativo</a></li>
+
+    <!-- ── Fichas Comerciales dropdown ── -->
+    <li class="relative group">
+      <button class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-1.5 rounded-md text-sm transition-colors flex items-center gap-1.5 bg-transparent border-0 cursor-pointer">
+        Fichas Comerciales
+        <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+      <div class="absolute top-[calc(100%+6px)] left-0 w-52 bg-slate-800 border border-slate-700 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 origin-top scale-95 group-hover:scale-100 z-50 py-1.5">
+        <a href="operativo/productor.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-300 hover:text-white hover:bg-slate-700/60 rounded-lg mx-1 transition-colors">
+          <span>🏭</span> Panel Productor
+        </a>
+        <a href="operativo/transportista.html" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-300 hover:text-white hover:bg-slate-700/60 rounded-lg mx-1 transition-colors">
+          <span>🚛</span> Panel Transportista
+        </a>
+      </div>
+    </li>
+
+
+  </ul>
+  <span class="bg-emerald-900 text-emerald-300 border border-emerald-700 text-xs font-semibold px-3 py-1 rounded-full">
+    ⚡ Decreto 12 · Ley REP
+  </span>
+</nav>
+
+<!-- ══════════════════════════════
+     HERO COMPACTO
+══════════════════════════════ -->
+<header class="bg-gradient-to-br from-slate-900 via-emerald-950 to-emerald-800 text-white py-8 px-8">
+  <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4">
+    <div>
+      <p class="text-emerald-400 text-xs font-bold tracking-widest uppercase mb-1">Damu SGC · Trazabilidad Ley REP</p>
+      <h1 class="text-2xl md:text-3xl font-black leading-tight">
+        Logística inversa inteligente <br class="hidden md:block"/>para el <span class="text-emerald-400">cumplimiento REP en Chile</span>
+      </h1>
+      <p class="text-slate-300 text-sm mt-2 max-w-lg">Conectamos empresas productoras y transportistas en una red de recolección y valorización conforme al Decreto 12 · Ley 20.920.</p>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <a href="operativo/index.html" class="bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors no-underline">Abrir Módulo Operativo →</a>
+      </div>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <span class="bg-white/10 border border-white/20 text-white/80 text-xs px-3 py-1 rounded-full">Decreto N° 12</span>
+      <span class="bg-white/10 border border-white/20 text-white/80 text-xs px-3 py-1 rounded-full">5 categorías REP</span>
+      <span class="bg-white/10 border border-white/20 text-white/80 text-xs px-3 py-1 rounded-full">Trazabilidad QR</span>
+      <span class="bg-white/10 border border-white/20 text-white/80 text-xs px-3 py-1 rounded-full">TMS integrado</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════════
+     NUESTRAS SOLUCIONES
+══════════════════════════════════════════════════════════ -->
+<section class="max-w-6xl mx-auto w-full px-4 md:px-6 py-12">
+
+  <!-- Encabezado de sección -->
+  <div class="text-center mb-10">
+    <p class="text-emerald-600 text-xs font-bold tracking-widest uppercase mb-2">Lo que ofrecemos</p>
+    <h2 class="text-2xl md:text-3xl font-black text-slate-800">Nuestras Soluciones</h2>
+    <p class="text-slate-500 text-sm mt-2 max-w-xl mx-auto">Plataformas especializadas para cada actor de la cadena de valor REP — productores que deben cumplir metas y transportistas que ejecutan la recolección.</p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+    <!-- ═══════════════════════════════════
+         TARJETA — PRODUCTORES
+    ═══════════════════════════════════ -->
+    <div class="bg-white rounded-2xl border border-emerald-100 shadow-lg overflow-hidden flex flex-col">
+
+      <!-- Header -->
+      <div class="bg-gradient-to-r from-emerald-700 to-emerald-600 px-6 py-5">
+        <span class="inline-block bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full mb-3">🏭 Portal Empresas Productoras</span>
+        <h3 class="text-white font-black text-xl leading-tight">Gestiona tu cumplimiento bajo la Ley REP</h3>
+        <p class="text-emerald-100 text-sm mt-2">Desde este portal puedes generar tu Eco-Ticket, reportar tus metas de valorización anuales, obtener certificados de trazabilidad y proyectar tus costos operativos.</p>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-3 divide-x divide-emerald-100 border-b border-emerald-100">
+        <div class="px-4 py-3 text-center">
+          <p class="text-xs font-black text-slate-700">Decreto N° 12</p>
+          <p class="text-xs text-slate-400 mt-0.5">Marco legal</p>
+        </div>
+        <div class="px-4 py-3 text-center">
+          <p class="text-xs font-black text-slate-700">5 categorías REP</p>
+          <p class="text-xs text-slate-400 mt-0.5">Productos</p>
+        </div>
+        <div class="px-4 py-3 text-center">
+          <p class="text-xs font-black text-slate-700">Certificados PDF</p>
+          <p class="text-xs text-slate-400 mt-0.5">Automáticos</p>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <div class="px-6 py-5 flex-1">
+        <p class="text-xs font-bold text-slate-400 uppercase tracking-wide mb-3">Funcionalidades</p>
+        <div class="grid grid-cols-2 gap-2 mb-5">
+          <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-base">📋</span> Metas REP</div>
+          <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-base">🧾</span> Eco-Ticket</div>
+          <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-base">📄</span> Certificados</div>
+          <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-base">⚖️</span> Multas Art. 48</div>
+        </div>
+
+        <p class="text-xs font-bold text-slate-400 uppercase tracking-wide mb-3">Productos prioritarios</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold px-3 py-1 rounded-full">📦 Envases</span>
+          <span class="bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold px-3 py-1 rounded-full">🛞 Neumáticos</span>
+          <span class="bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold px-3 py-1 rounded-full">🔋 Pilas</span>
+          <span class="bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold px-3 py-1 rounded-full">🖥️ RAEE</span>
+          <span class="bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold px-3 py-1 rounded-full">🛢️ Aceites</span>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="px-6 pb-6">
+        <a href="operativo/productor.html" class="block w-full text-center bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm py-3 rounded-xl transition-colors no-underline">
+          Abrir Panel Productor →
+        </a>
+      </div>
+
+    </div>
+
+    <!-- ═══════════════════════════════════
+         TARJETA — TRANSPORTISTAS
+    ═══════════════════════════════════ -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden flex flex-col">
+
+      <!-- Header -->
+      <div class="bg-gradient-to-r from-slate-800 to-slate-700 px-6 py-5">
+        <span class="inline-block bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full mb-3">🚚 Portal Socios Transportistas</span>
+        <h3 class="text-white font-black text-xl leading-tight">Registra y controla tu flota en la red de recolección</h3>
+        <p class="text-slate-300 text-sm mt-2">Visualiza los puntos de acopio activos, escanea cargas QR, registra tus viajes y consulta métricas básicas de tu operación dentro de la red Damu SGC.</p>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-3 divide-x divide-slate-100 border-b border-slate-100">
+        <div class="px-4 py-3 text-center">
+          <p class="text-xs font-black text-slate-700">Mapa de Ruta</p>
+          <p class="text-xs text-slate-400 mt-0.5">Puntos activos</p>
+        </div>
+        <div class="px-4 py-3 text-center">
+          <p class="text-xs font-black text-slate-700">Registro viajes</p>
+          <p class="text-xs text-slate-400 mt-0.5">Por operación</p>
+        </div>
+        <div class="px-4 py-3 text-center">
+          <p class="text-xs font-black text-slate-700">QR / Código</p>
+          <p class="text-xs text-slate-400 mt-0.5">Escaneo</p>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <div class="px-6 py-5 flex-1">
+        <p class="text-xs font-bold text-slate-400 uppercase tracking-wide mb-3">Funcionalidades</p>
+        <div class="grid grid-cols-2 gap-2 mb-5">
+          <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-base">📍</span> Mapa de Acopio</div>
+          <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-base">📊</span> Mis KPIs</div>
+          <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-base">📷</span> Escaneo QR</div>
+          <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-base">🗺️</span> Mapa de Ruta</div>
+        </div>
+
+        <p class="text-xs font-bold text-slate-400 uppercase tracking-wide mb-3">Herramientas de ruta</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold px-3 py-1 rounded-full">🗺️ Mapa de Ruta</span>
+          <span class="bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold px-3 py-1 rounded-full">⛽ Estimador diésel</span>
+          <span class="bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold px-3 py-1 rounded-full">📷 Escaneo QR</span>
+          <span class="bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold px-3 py-1 rounded-full">📊 Métricas básicas</span>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="px-6 pb-6">
+        <a href="operativo/transportista.html" class="block w-full text-center bg-slate-700 hover:bg-slate-600 text-white font-bold text-sm py-3 rounded-xl transition-colors no-underline">
+          Abrir Panel Transportista →
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     FOOTER
+══════════════════════════════ -->
+<footer class="bg-slate-900 text-slate-400 text-xs py-5 border-t border-slate-800 mt-auto">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-3">
+    <p><strong class="text-white">Damu SGC</strong> — Trazabilidad Ley REP · Chile</p>
+    <div class="flex gap-4 flex-wrap justify-center">
+      <a href="operativo/index.html"        class="hover:text-white transition-colors">Módulo Operativo</a>
+      <a href="operativo/productor.html"    class="hover:text-white transition-colors">Productor</a>
+      <a href="operativo/transportista.html" class="hover:text-white transition-colors">Transportista</a>
+    </div>
+    <p class="text-slate-600">© 2026 Damu SGC</p>
+  </div>
+</footer>
+
+</body>
+</html>
