@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Productor — Damu SGC Operativo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <script src="js/store.js" defer></script>
+  <script src="js/qr.js" defer></script>
+  <script src="js/productor.js" defer></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+
+  <header class="bg-slate-900 border-b border-slate-800 px-6 h-16 flex items-center justify-between gap-4 sticky top-0 z-40">
+    <a href="index.html" class="flex items-center gap-3 no-underline">
+      <div class="w-9 h-9 rounded-full bg-emerald-600 flex items-center justify-center font-black text-white">D</div>
+      <div class="leading-tight"><span class="font-bold block text-white">Panel Productor</span><span class="text-emerald-400 text-xs">Damu SGC — Operativo REP</span></div>
+    </a>
+    <div class="flex items-center gap-3">
+      <div id="codigo-box" class="hidden items-center gap-2 text-sm bg-slate-800 border border-slate-700 px-3 py-1.5 rounded-lg">
+        Código: <strong id="codigo-val" class="text-emerald-400 tracking-wider"></strong>
+        <button id="btn-copiar" class="text-xs text-slate-400 hover:text-white">copiar</button>
+      </div>
+      <button id="btn-salir" class="hidden text-xs font-semibold bg-red-900/30 border border-red-800/50 text-red-400 px-3 py-1.5 rounded-lg">Salir</button>
+    </div>
+  </header>
+
+  <section id="vista-inicio" class="max-w-md mx-auto mt-20 px-6 text-center">
+    <h1 class="text-2xl font-bold mb-2">Iniciar sesión operativa</h1>
+    <p class="text-slate-400 text-sm mb-6">Sin registro. Genera tu Código de Productor o recupera el tuyo.</p>
+    <input id="in-empresa" placeholder="Nombre de tu productora" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 mb-3" />
+    <button id="btn-crear" class="w-full bg-emerald-600 hover:bg-emerald-500 font-semibold rounded-lg py-2.5 mb-4">Generar código y entrar</button>
+    <div class="flex items-center gap-2 mb-4"><div class="flex-1 h-px bg-slate-800"></div><span class="text-xs text-slate-500">o recupera</span><div class="flex-1 h-px bg-slate-800"></div></div>
+    <div class="flex gap-2">
+      <input id="in-codigo" placeholder="DAMU-XXXX" class="flex-1 bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 uppercase" />
+      <button id="btn-recuperar" class="bg-slate-700 hover:bg-slate-600 font-semibold rounded-lg px-4">Entrar</button>
+    </div>
+    <p id="inicio-msg" class="text-red-400 text-sm mt-3 h-5"></p>
+  </section>
+
+  <main id="vista-panel" class="hidden max-w-6xl mx-auto px-6 py-8 grid lg:grid-cols-2 gap-6">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+      <h2 class="font-bold text-lg mb-4">🌱 Calculadora Ambiental</h2>
+      <label class="text-xs text-slate-400">Categoría REP</label>
+      <select id="p-categoria" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 mb-3 mt-1"></select>
+      <label class="text-xs text-slate-400">Toneladas a producir/recolectar</label>
+      <input id="p-toneladas" type="number" min="0" step="0.1" value="10" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 mb-3 mt-1" />
+      <label class="text-xs text-slate-400">Meta valorización %</label>
+      <input id="p-meta" type="number" min="0" max="100" value="25" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 mb-3 mt-1" />
+      <p class="text-sm text-emerald-400 mb-3">CO₂e estimado: <strong id="p-co2">0</strong> t</p>
+      <button id="btn-add-prod" class="w-full bg-emerald-600 hover:bg-emerald-500 font-semibold rounded-lg py-2">Asignar producción</button>
+      <ul id="lista-producciones" class="mt-4 space-y-1 text-sm"></ul>
+    </div>
+
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+      <h2 class="font-bold text-lg mb-4">🗺️ Gestión de Rutas (Ley REP)</h2>
+      <div class="grid grid-cols-2 gap-2 mb-3">
+        <input id="r-origen" placeholder="Origen" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2" />
+        <input id="r-destino" placeholder="Destino" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2" />
+      </div>
+      <label class="text-xs text-slate-400">Distancia (km)</label>
+      <input id="r-distancia" type="number" min="0" value="40" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 mb-2 mt-1" />
+      <p class="text-sm text-slate-300 mb-2">Impacto: <strong id="r-co2">0</strong> kg CO₂e · Diésel <strong id="r-diesel">0</strong> CLP</p>
+      <label class="text-xs text-slate-400">Vincular producción</label>
+      <select id="r-vinculo" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 mb-3 mt-1"></select>
+      <button id="btn-add-ruta" class="w-full bg-blue-600 hover:bg-blue-500 font-semibold rounded-lg py-2">Crear y vincular ruta</button>
+    </div>
+
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 lg:col-span-2">
+      <h2 class="font-bold text-lg mb-4">🚚 Rutas y entregas <span class="text-xs text-slate-500 font-normal">(en tiempo real)</span></h2>
+      <div id="lista-rutas" class="grid md:grid-cols-2 xl:grid-cols-3 gap-3"></div>
+      <p id="rutas-vacio" class="text-slate-500 text-sm">Aún no hay rutas creadas.</p>
+    </div>
+  </main>
+
+  <div id="modal-qr" class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+    <div class="bg-white text-slate-900 rounded-2xl p-6 text-center max-w-xs w-full">
+      <h3 class="font-bold mb-1">QR de confirmación</h3>
+      <p class="text-xs text-slate-500 mb-3" id="qr-ruta-label"></p>
+      <div id="qr-canvas" class="flex justify-center mb-3"></div>
+      <p class="text-[11px] text-slate-400 mb-1">Código manual (demo sin cámara):</p>
+      <code id="qr-token" class="text-[11px] break-all text-slate-600 block mb-4"></code>
+      <button id="btn-cerrar-qr" class="w-full bg-slate-800 text-white font-semibold rounded-lg py-2">Cerrar</button>
+    </div>
+  </div>
+</body>
+</html>
